@@ -1,21 +1,26 @@
 <template>
   <div id="app">
-    <Todos v-bind:todos="todos" v-on:del-todo="deleteTodo"/>
+    <Header />
+    <TodoAdd v-on:add-todo="addTodo" />
+    <Todos v-bind:todos="todos" v-on:del-todo="deleteTodo" />
   </div>
 </template>
 
 <script>
+import Header from "./components/layouts/Header";
 import Todos from "./components/Todos";
+import TodoAdd from "./components/TodoAdd";
 
 export default {
   name: "app",
   components: {
-    Todos
+    Todos,
+    Header,
+    TodoAdd
   },
   data() {
     return {
       todos: [
-        // added defaults here to avoid flash of default data
         {
           id: 1,
           title: 'This is a simple ToDo "app"',
@@ -44,10 +49,14 @@ export default {
     };
   },
   methods: {
-      deleteTodo(id) {
-          this.todos = this.todos.filter(todo => todo.id !== id);
-        }
+    deleteTodo(id) {
+      // delete todo item
+      this.todos = this.todos.filter(todo => todo.id !== id);
+    },
+    addTodo(newTodo) {
+      this.todos = [...this.todos, newTodo];
     }
+  }
 };
 </script>
 

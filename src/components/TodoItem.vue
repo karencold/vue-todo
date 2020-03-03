@@ -2,7 +2,7 @@
   <div>
     <input type="checkbox" v-on:change="todoItemDone" />
     <div class="todoTitleWrap">
-      <span v-bind:class="{'done':todo.done}">{{todo.title}}</span>
+      <span v-bind:class="{'done':todo.done}" class="todoTitle">{{todo.title}}</span>
     </div>
     <button name="delete" class="deleteItem" v-on:click="$emit('del-todo', todo.id)">x</button>
   </div>
@@ -16,12 +16,22 @@ export default {
     todoItemDone() {
       this.todo.done = !this.todo.done;
     },
-    deleteTodo() {
-
-    }
+    deleteTodo() {}
   }
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
+.todoItem div {
+  display: flex;
+}
+.todoTitle {
+  margin-left: 5px;
+}
+.deleteItem {
+  margin-left: 5px;
+}
+.done {
+  text-decoration: line-through;
+}
 </style>
