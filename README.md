@@ -1,24 +1,8 @@
-# todo
+# ToDo app
+## Overview
 
-## Project setup
-```
-npm install
-```
+This is very basic todo app with some basic features like edit delete adding new and toggling done state
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Live demo
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+[Live demo here](https://laughing-pike-e188a5.netlify.app/)
