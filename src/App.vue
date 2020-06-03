@@ -1,8 +1,15 @@
 <template>
   <div id="app">
-    <Header />
-    <TodoAdd v-on:add-todo="addTodo" />
-    <Todos v-bind:todos="todos" v-on:del-todo="deleteTodo" />
+    <Header>
+      <TodoAdd v-on:add-todo="addTodo" />
+    </Header>
+    <Todos
+      v-bind:todos="todos"
+      @del-todo="deleteTodo"
+      @edit-todo="editStateInit"
+      @toggle-done="doneToggle"
+      @todo-blur="editStateDelete"
+    />
   </div>
 </template>
 
@@ -29,19 +36,7 @@ export default {
         },
         {
           id: 2,
-          title: "You can add, check and delete tasks",
-          done: false,
-          editState: false
-        },
-        {
-          id: 3,
-          title: "These tasks are saved in your browser",
-          done: false,
-          editState: false
-        },
-        {
-          id: 4,
-          title: "You can tab through tasks with keyboard",
+          title: "You can add, check, edit and delete tasks",
           done: false,
           editState: false
         }
@@ -55,14 +50,41 @@ export default {
     },
     addTodo(newTodo) {
       this.todos = [...this.todos, newTodo];
+    },
+    doneToggle(id) {
+      this.todos = this.todos.map(todo => {
+        todo.id === id ? (todo.done = !todo.done) : null;
+        return todo;
+      });
+    },
+    editStateInit(id) {
+      this.todos = this.todos.map(todo => {
+        todo.id === id ? (todo.editState = true) : null;
+        return todo;
+      });
+    },
+    editStateDelete(id) {
+      this.todos = this.todos.map(todo => {
+        todo.id === id ? (todo.editState = false) : null;
+        return todo;
+      });
     }
   }
 };
 </script>
 
 <style>
+body {
+  margin: 0;
+  padding: 0;
+}
 #app {
+  box-sizing: border-box;
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   line-height: 1.4;
+  width: 60%;
+  min-width: 320px;
+  margin: auto;
+  padding: 0 10px;
 }
 </style>

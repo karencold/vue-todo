@@ -18,14 +18,17 @@ export default {
   methods: {
     addTodo(e) {
       e.preventDefault();
-      const newTodo = {
-        id: Date.now(),
+      if (this.title != "") {
+        const newTodo = {
+          id: Date.now(),
 
-        title: this.title,
-        done: false
-      };
-      this.title = "";
-      this.$emit("add-todo", newTodo);
+          title: this.title,
+          done: false,
+          editState: false
+        };
+        this.title = "";
+        this.$emit("add-todo", newTodo);
+      }
     }
   }
 };
